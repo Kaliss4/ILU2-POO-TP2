@@ -19,4 +19,8 @@ public class Chef extends Gaulois {
 	protected String prendreParole() {
 		return "Le chef " + nom + " du village " + village.getNom() + " : ";
 	}
+	
+	public String getNom(){
+		return nom;	
+	}
 }
