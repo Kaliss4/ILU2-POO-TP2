@@ -18,13 +18,18 @@ public class ControlAcheterProduit {
 	}
 	
 	
-	public Gaulois[] trouverProduit(String Produit) {
-		return village.rechercherVendeursProduit(Produit);
-		
+	public String[] trouverProduit(String produit) {
+		Gaulois[] vendeursProduit =village.rechercherVendeursProduit(produit);
+		String[]vendeur=new String[vendeursProduit.length];
+		for (int i = 0; i < vendeursProduit.length; i++) {	
+			vendeur[i]=vendeursProduit[i].getNom();
+		}
+		return vendeur;
 	}
 	
-	public Etal trouverEtal (Gaulois vendeur) {
-		return village.rechercherEtal(vendeur);
+	public int trouverEtal (String nomVendeur) {
+		Etal etal =controlTrouverEtalVendeur.trouverEtalVendeur(nomVendeur);
+		return etal.getQuantite();
 	}
 	
 	public boolean verifierIdentite(String nomAcheteur) {
@@ -32,11 +37,11 @@ public class ControlAcheterProduit {
 		return nomAcheteur!=null;
 	}
 	
-	public void acheter (Etal etal, int qtte) {
+	public void acheter (String nomVendeur, int qtte) {
+		Etal etal =controlTrouverEtalVendeur.trouverEtalVendeur(nomVendeur);
 		etal.acheterProduit(qtte);
 		
 	}
 	
-	//TODO a completer
 }
 
