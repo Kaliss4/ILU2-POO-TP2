@@ -1,12 +1,9 @@
 package frontiere;
 
-import java.util.Iterator;
-import java.util.Scanner;
 
 import controleur.ControlAcheterProduit;
 
 public class BoundaryAcheterProduit {
-	private Scanner scan = new Scanner(System.in);
 	private ControlAcheterProduit controlAcheterProduit;
 
 	public BoundaryAcheterProduit(ControlAcheterProduit controlAcheterProduit) {
@@ -32,31 +29,39 @@ public class BoundaryAcheterProduit {
 			System.out.println("Desole, personne ne vend ce produit au marche.");
 		}
 		else {
-			StringBuilder questionVendeur = new StringBuilder();
-			questionVendeur.append("Chez quel commercant voulez-vous acheter des "+produit+" ? \n");
+			choixProduit(vendeur,nomAcheteur, produit);
 			
-			for (int i = 0; i < vendeur.length; i++) {
-				int indice = i+1;
-				questionVendeur.append(indice+" - "+ vendeur[i]+"\n");
-			}
-			int choixVendeur =0;
-			do {
-				choixVendeur =Clavier.entrerEntier(questionVendeur.toString());
-				System.out.println("Vous devez choisir un etal proposé");
-			}while (choixVendeur<1 || choixVendeur>vendeur.length);
-			
-				System.out.println(nomAcheteur+" se deplace jusqu'a l'etal du vendeur "+ vendeur[choixVendeur-1]+ "\n Bonjour "+ nomAcheteur+ "\n");
-				StringBuilder questionQtte = new StringBuilder();
-				questionQtte.append("Combien de "+produit+" voulez-vous acheter ?");
-				int choixQtte =Clavier.entrerEntier(questionQtte.toString());
-				
-				acheterVendeur(nomAcheteur,vendeur[choixVendeur-1],produit,choixQtte);
 				
 			
 			
 			
 		}
 	}
+	
+	private void choixProduit (String[]vendeur, String nomAcheteur,String produit) {
+		StringBuilder questionVendeur = new StringBuilder();
+		questionVendeur.append("Chez quel commercant voulez-vous acheter des "+produit+" ? \n");
+		
+		for (int i = 0; i < vendeur.length; i++) {
+			int indice = i+1;
+			questionVendeur.append(indice+" - "+ vendeur[i]+"\n");
+		}
+		int choixVendeur =0;
+		do {
+			choixVendeur =Clavier.entrerEntier(questionVendeur.toString());
+			System.out.println("Vous devez choisir un etal proposé");
+		}while (choixVendeur<1 || choixVendeur>vendeur.length);
+		
+			System.out.println(nomAcheteur+" se deplace jusqu'a l'etal du vendeur "+ vendeur[choixVendeur-1]+ "\n Bonjour "+ nomAcheteur+ "\n");
+			StringBuilder questionQtte = new StringBuilder();
+			questionQtte.append("Combien de "+produit+" voulez-vous acheter ?");
+			int choixQtte =Clavier.entrerEntier(questionQtte.toString());
+			
+			acheterVendeur(nomAcheteur,vendeur[choixVendeur-1],produit,choixQtte);
+		
+	}
+	
+	
 	private void acheterVendeur(String nomAcheteur, String vendeur,String produit,int qtte) {
 		int quanttiteProduit = controlAcheterProduit.trouverEtal(vendeur);
 		if (quanttiteProduit==0) {

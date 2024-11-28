@@ -20,6 +20,7 @@ public class ControlAcheterProduit {
 	
 	public String[] trouverProduit(String produit) {
 		Gaulois[] vendeursProduit =village.rechercherVendeursProduit(produit);
+		if (vendeursProduit==null)return null;
 		String[]vendeur=new String[vendeursProduit.length];
 		for (int i = 0; i < vendeursProduit.length; i++) {	
 			vendeur[i]=vendeursProduit[i].getNom();
@@ -33,8 +34,7 @@ public class ControlAcheterProduit {
 	}
 	
 	public boolean verifierIdentite(String nomAcheteur) {
-		controlVerifierIdentite.verifierIdentite(nomAcheteur);
-		return nomAcheteur!=null;
+		return controlVerifierIdentite.verifierIdentite(nomAcheteur);
 	}
 	
 	public void acheter (String nomVendeur, int qtte) {
